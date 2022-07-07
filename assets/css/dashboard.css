@@ -1,0 +1,43 @@
+
+
+/*
+
+#history #table {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#history #table_content_container {
+    position: relative;
+    flex: 1;
+}
+
+#history #table_header {
+    font-weight: 600;
+    border-bottom: 1px solid white;
+}
+
+#history .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+#history .row div {
+    width: 33.33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#history #table_content .row:nth-child(odd) {
+    background-color: var(--bg-color);
+}
+
+#history #table_content .row:hover {
+    background-color:#161616;
+}
+
+*/

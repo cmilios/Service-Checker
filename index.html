@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+
+    <!-- CSS only -->
+
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet" />
+  
+
+  <link href="style.css" rel="stylesheet" />
+
+
+  <link href="/assets/css/normalize.css" rel="stylesheet" />
+
+  <link href="/assets/css/custom-radio-button.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+
+  
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+
+
+
+
+
+  <title>Document</title>
+</head>
+<body>
+  <div id="main_app">
+    <div id="filters" class="fixed container">
+        <div class="header"><div class="arrow-button"><span class="iconify" data-icon="fe:arrow-left"></span></div><span class="titleHeader">Filters</span></div>
+        <div class="header header_2 title2">
+            <div>
+                <label class="radio-container">
+                    <input type="radio" id="tweets" checked="checked" name="mode" value="0">
+                    <span class="radio-label">Tweets</span>
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div>
+                <label class="radio-container">
+                    <input type="radio" id="clusters" name="mode" value="1">
+                    <span class="radio-label">Clusters</span>
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+        <div class="content component">
+            <label>From:</label>
+            <input id="datepicker_from" class="datepicker" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date="0d" data-date-autoclose="true" data-date-orientation="left bottom">
+            <label>To:</label>
+            <input id="datepicker_to" class="datepicker" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date="0d" data-date-autoclose="true" data-date-orientation="left bottom">
+            <label class="checkbox-container search_filter">
+                <input type="checkbox" id="with_image"> 
+                <span class="checkbox-label">With image</span>
+                <span class="checkmark"></span>
+            </label>
+            <label class="checkbox-container search_filter">
+                <input type="checkbox" id="with_location"> 
+                <span class="checkbox-label">With location</span>
+                <span class="checkmark"></span>
+            </label>
+            <label class="checkbox-container search_filter">
+                <input type="checkbox" id="only_relevant"> 
+                <span class="checkbox-label">Only relevant</span>
+                <span class="checkmark"></span>
+            </label>
+            <div id="get_button_container"><div id="get_button"><span>GET</span></div></div>
+        </div>
+    </div>
+    
+    <div id="map_container" >
+        <div class="header"><div class="arrow-button"><span class="iconify" data-icon="fe:arrow-left"></span></div><span class="titleHeader">Map</span> </div>
+        <div class="content component">
+            <div id="map"></div>
+            <div id="style_menu">
+                <div>
+                    <input id="satellite-streets-v11" type="radio" name="rtoggle" value="satellite" checked="checked">
+                    <label for="satellite-streets-v11"><span class="iconify" data-icon="si-glyph:satellite" data-inline="false"></span>Satellite</label>
+                </div>
+                <div>
+                    <input id="streets-v11" type="radio" name="rtoggle" value="streets">
+                    <label for="streets-v11"><span class="iconify" data-icon="si-glyph:road" data-inline="false"></span>Map</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="timeline">
+        <div class="header">
+            <div id="timeline_title">
+                <div class="arrow-button"><span class="iconify" data-icon="fe:arrow-left"></span></div>
+                <span class="titleHeader">Timeline</span> 
+            </div>
+            <div id="pagination_controls">
+                <div id="previous_page" class="pagination_buttons"><span class="iconify" data-icon="fe:arrow-left"></span></div>
+                <div id="page_number">1</div>
+                <div id="next_page" class="pagination_buttons"><span class="iconify" data-icon="fe:arrow-right"></span></div>
+            </div>
+        </div>
+        <div class="content">
+
+
+
+
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="timelineItem accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div>
+                        <div>
+                            <h2 class="title">title</h2>
+                        </div>
+                        <div class="sub">
+                            date
+                        </div> 
+                    </div>
+                      
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in felis dignissim, imperdiet nulla vitae, condimentum nulla. Ut scelerisque a nisl sit amet facilisis. Etiam blandit iaculis tellus, vitae condimentum leo congue a. Vivamus in vehicula massa. Pellentesque libero libero, commodo lacinia volutpat non, tincidunt at lectus. Maecenas ipsum turpis, viverra vitae lacus eu, fringilla ultricies erat. Aenean hendrerit maximus sodales.
+                    </div>
+                  </div>
+                </div>
+                
+            </div>
+            
+
+            
+
+
+            
+            <!-- <div class="event component">
+                <div class="reliability_bar_container">
+                    <div class="reliability_bar high_reliability">
+                        <div class="score_bar" style="width:85%;"><span>85%</span></div>
+                    </div>
+                </div>
+
+                <div class="event_info">
+                    <div class="flex">
+                        <div class="flex event_icon">
+                            <span class="iconify" data-icon="bi:file-earmark-text"></span>
+                        </div>
+                        <div>
+                            <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                            <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                        </div>
+                    </div>
+                    <div class="event_toggle_button">
+                        <span class="iconify" data-icon="fe:arrow-down"></span>
+                    </div>
+                </div>
+                <div class="event_tweets">
+                    <div class="tweet component">
+                        <div class="relevance_estimation relevant"><span>100%</span></div>
+                        <div class="reliability_bar_container">
+                            <div class="reliability_bar high_reliability">
+                                <div class="score_bar" style="width:85%;"><span>85%</span></div>
+                            </div>
+                        </div>
+                        <div class="tweet_info">
+                            <div class="tweet_text">
+                            #alluvione QT: Spaventose immagini da #Catania e parte della #Sicilia, colpite da un’#alluvione senza precedenti. Scene che fanno male al cuore: ogni anno parliamo del #maltempo senza fare nulla per contrastare il cambiamento climatico. Agiamo invece di piangere quando succedono queste cose!! https://t.co/mlGox6qgVj
+                            </div>
+                            <div class="tweet_details">
+                                <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                                <div class="locations">
+                                    <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                                    <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                                </div>
+                                <div class="img_concepts_container">
+                                    <div class="bubble">flood</div>
+                                    <div class="bubble">building</div>
+                                    <div class="bubble">car</div>
+                                    <div class="bubble">water</div>
+                                </div>
+                                <div class="detected_vehicles"><div>3 vehicles were detected</div></div>
+                            </div>
+                        </div>                
+                    </div>
+
+                    <div class="tweet component">
+                        <div class="relevance_estimation relevant"><span>100%</span></div>
+                        <div class="reliability_bar_container">
+                            <div class="reliability_bar high_reliability">
+                                <div class="score_bar" style="width:85%;"><span>85%</span></div>
+                            </div>
+                        </div>
+                        <div class="tweet_info">
+                            <div class="tweet_text">
+                            #alluvione QT: Spaventose immagini da #Catania e parte della #Sicilia, colpite da un’#alluvione senza precedenti. Scene che fanno male al cuore: ogni anno parliamo del #maltempo senza fare nulla per contrastare il cambiamento climatico. Agiamo invece di piangere quando succedono queste cose!! https://t.co/mlGox6qgVj
+                            </div>
+                            <div class="tweet_details">
+                                <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                                <div class="locations">
+                                    <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                                    <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                                </div>
+                                <div class="img_concepts_container">
+                                    <div class="bubble">flood</div>
+                                    <div class="bubble">building</div>
+                                    <div class="bubble">car</div>
+                                    <div class="bubble">water</div>
+                                </div>
+                                <div class="detected_vehicles"><div>3 vehicles were detected</div></div>
+                            </div>
+                        </div>                
+                    </div>
+                </div>
+            </div>
+
+            <div class="event component">
+                
+                <div class="reliability_bar_container">
+                    <div class="reliability_bar high_reliability">
+                        <div class="score_bar" style="width:85%;"><span>85%</span></div>
+                    </div>
+                </div>
+
+                <div class="event_info">
+                    <div class="flex">
+                        <div class="flex event_icon">
+                            <span class="iconify" data-icon="bi:file-earmark-text"></span>
+                        </div>
+                        <div>
+                            <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                            <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                        </div>
+                    </div>
+                    <div class="event_toggle_button">
+                        <span class="iconify" data-icon="fe:arrow-down"></span>
+                    </div>
+                </div>
+                <div class="event_tweets">
+                    <div class="tweet component">
+                        <div class="relevance_estimation relevant"><span>100%</span></div>
+                        <div class="reliability_bar_container">
+                            <div class="reliability_bar high_reliability">
+                                <div class="score_bar" style="width:85%;"><span>85%</span></div>
+                            </div>
+                        </div>
+                        <div class="tweet_info">
+                            <div class="tweet_text">
+                            #alluvione QT: Spaventose immagini da #Catania e parte della #Sicilia, colpite da un’#alluvione senza precedenti. Scene che fanno male al cuore: ogni anno parliamo del #maltempo senza fare nulla per contrastare il cambiamento climatico. Agiamo invece di piangere quando succedono queste cose!! https://t.co/mlGox6qgVj
+                            </div>
+                            <div class="tweet_details">
+                                <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                                <div class="locations">
+                                    <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                                    <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                                </div>
+                                <div class="img_concepts_container">
+                                    <div class="bubble">flood</div>
+                                    <div class="bubble">building</div>
+                                    <div class="bubble">car</div>
+                                    <div class="bubble">water</div>
+                                </div>
+                                <div class="detected_vehicles"><div>3 vehicles were detected</div></div>
+                            </div>
+                        </div>                
+                    </div>
+
+                    <div class="tweet component">
+                        <div class="relevance_estimation relevant"><span>100%</span></div>
+                        <div class="reliability_bar_container">
+                            <div class="reliability_bar high_reliability">
+                                <div class="score_bar" style="width:85%;"><span>85%</span></div>
+                            </div>
+                        </div>
+                        <div class="tweet_info">
+                            <div class="tweet_text">
+                            #alluvione QT: Spaventose immagini da #Catania e parte della #Sicilia, colpite da un’#alluvione senza precedenti. Scene che fanno male al cuore: ogni anno parliamo del #maltempo senza fare nulla per contrastare il cambiamento climatico. Agiamo invece di piangere quando succedono queste cose!! https://t.co/mlGox6qgVj
+                            </div>
+                            <div class="tweet_details">
+                                <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                                <div class="locations">
+                                    <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                                    <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                                </div>
+                                <div class="img_concepts_container">
+                                    <div class="bubble">flood</div>
+                                    <div class="bubble">building</div>
+                                    <div class="bubble">car</div>
+                                    <div class="bubble">water</div>
+                                </div>
+                                <div class="detected_vehicles"><div>3 vehicles were detected</div></div>
+                            </div>
+                        </div>                
+                    </div>
+                </div>
+            </div> 
+             <div class="tweet component">
+                <div class="relevance_estimation relevant"><span>100%</span></div>
+                <div class="reliability_bar_container">
+                    <div class="reliability_bar high_reliability">
+                        <div class="score_bar" style="width:85%;"><span>85%</span></div>
+                    </div>
+                </div>
+                <div class="tweet_info">
+                    <div class="tweet_text">
+                    #alluvione QT: Spaventose immagini da #Catania e parte della #Sicilia, colpite da un’#alluvione senza precedenti. Scene che fanno male al cuore: ogni anno parliamo del #maltempo senza fare nulla per contrastare il cambiamento climatico. Agiamo invece di piangere quando succedono queste cose!! https://t.co/mlGox6qgVj
+                    </div>
+                    <div class="tweet_details">
+                        <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                        <div class="locations">
+                            <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                            <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                        </div>
+                        <div class="img_concepts_container">
+                            <div class="bubble">flood</div>
+                            <div class="bubble">building</div>
+                            <div class="bubble">car</div>
+                            <div class="bubble">water</div>
+                        </div>
+                        <div class="detected_vehicles"><div>3 vehicles were detected</div></div>
+                    </div>
+                </div>                
+            </div>
+
+            <div class="tweet component">
+                <div class="relevance_estimation relevant"><span>70%</span></div>
+                <div class="reliability_bar_container">
+                    <div class="reliability_bar middle_reliability">
+                        <div class="score_bar" style="width:40%;"><span>40%</span></div>
+                    </div>
+                </div>
+                <div class="image_container"><img src="<?php echo get_bloginfo("template_directory") . "/assets/images/img.jpg"; ?>" alt=""></div>
+                <div class="tweet_info">
+                    <div class="tweet_text">
+                    #alluvione QT: Spaventose immagini da #Catania e parte della #Sicilia, colpite da un’#alluvione senza precedenti. Scene che fanno male al cuore: ogni anno parliamo del #maltempo senza fare nulla per contrastare il cambiamento climatico. Agiamo invece di piangere quando succedono queste cose!! https://t.co/mlGox6qgVj
+                    </div>
+                    <div class="tweet_details">
+                        <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                        <div class="locations">
+                            <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                            <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                        </div>
+                        <div class="img_concepts_container">
+                            <div class="bubble">flood</div>
+                            <div class="bubble">building</div>
+                            <div class="bubble">car</div>
+                            <div class="bubble">water</div>
+                        </div>
+                        <div class="detected_vehicles"><div>3 vehicles were detected</div></div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="tweet component">
+                <div class="relevance_estimation irrelevant"><span>9%</span></div>
+                <div class="reliability_bar_container">
+                    <div class="reliability_bar low_reliability">
+                        <div class="score_bar" style="width:15%;"><span>15%</span></div>
+                    </div>
+                </div>
+                <div class="tweet_info">
+                    <div class="tweet_text">
+                    #alluvione QT: Spaventose immagini da #Catania e parte della #Sicilia, colpite da un’#alluvione senza precedenti. Scene che fanno male al cuore: ogni anno parliamo del #maltempo senza fare nulla per contrastare il cambiamento climatico. Agiamo invece di piangere quando succedono queste cose!! https://t.co/mlGox6qgVj
+                    </div>
+                    <div class="tweet_details">
+                        <div class="tweet_date">Thu 02/12/2021 16:28</div>
+                        <div class="locations">
+                            <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Catania, Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                            <div class="location"><span class="iconify" data-icon="ep:location"></span><span class="location_name">Sicily, Italy&nbsp;</span><span class="location_coordinates">(37.5023, 15.0873)</span></div>
+                        </div>
+                        <div class="img_concepts_container">
+                            <div class="bubble">flood</div>
+                            <div class="bubble">building</div>
+                            <div class="bubble">car</div>
+                            <div class="bubble">water</div>
+                        </div>
+                        <div class="detected_vehicles"><div>3 vehicles were detected</div></div>
+                    </div>
+                </div>
+            </div>  -->
+
+        </div>
+    </div>
+</div>
+<div id="full_screen_image"><img src=""><span class="iconify" data-icon="bi:x-lg"></span></div>
+<div id="events_settings_modal">
+    <div id="modal">
+        <div id="close_modal"><span class="iconify" data-icon="bi:x-lg"></span></div>
+        <div id="modal_tile">Clustering settings</div>
+        <div>
+            <span>Distance (km):</span>
+            <input type="number" name="distance" id="distance" min="0" max="100" value="5">
+            <span class="iconify help" data-icon="bx:help-circle" title="The distance that is needed in order two tweets to be considered that they belong to the same cluster"></span>
+        </div>
+        <div>
+            <span>Minimum number of tweets:</span>
+            <input type="number" name="num_of_tweets" id="num_of_tweets" min="0" max="100" value="4">
+            <span class="iconify help" data-icon="bx:help-circle" title="The minimum number of tweets that a cluster should have in order to be saved"></span>
+        </div>
+        <div>
+            <span>Time window (min):</span>
+            <input type="number" name="time_window" id="time_window" min="0" max="360" value="4">
+            <span class="iconify help" data-icon="bx:help-circle" title="How much time a cluster should wait to complete the Minimum numbers of tweets in order to be saved"></span>
+        </div>
+        <div id="save_button">
+            <span>Save</span>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/assets/js/map-initialization.js"></script>
+<!-- <script src="/assets/libraries/jquery-3.6.0.slim.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+<!-- <script src="/assets/libraries/bootstrap-5.0.0-beta3-dist/bootstrap.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<!-- <script src="/assets/libraries/bootstrap-datepicker/bootstrap-datepicker.min.js"></script> -->
+<script src="/assets/js/index.js"></script>
+<script src="/assets/js/functions.js"></script>
+<script src="/assets/js/dummyData.js"></script>
+  
+</body>
+</html>
