@@ -12,6 +12,7 @@ let noMoreData = false;
 map = addMap()
 addLocationLayers();
 setMapAnimation();
+clickInteraction();
 
 // Resize of components
 let previousWidth = 0,
@@ -109,7 +110,7 @@ getButton.addEventListener("click", function () {
         queryParameters["with_location"] = $('#with_location').is(":checked");
         queryParameters["only_relevant"] = $('#only_relevant').is(":checked");
     }
-    console.log(queryParameters);
+    // console.log(queryParameters);
     changePageNumber(0);
     // newData();
 });

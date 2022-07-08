@@ -54,9 +54,9 @@
             </div>
         </div>
         <div class="content component">
-            <label>From:</label>
+            <label class="datelabel">From:</label>
             <input id="datepicker_from" class="datepicker" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date="0d" data-date-autoclose="true" data-date-orientation="left bottom">
-            <label>To:</label>
+            <label class="datelabel">To:</label>
             <input id="datepicker_to" class="datepicker" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date="0d" data-date-autoclose="true" data-date-orientation="left bottom">
             <label class="checkbox-container search_filter">
                 <input type="checkbox" id="with_image"> 
@@ -73,7 +73,8 @@
                 <span class="checkbox-label">Only relevant</span>
                 <span class="checkmark"></span>
             </label>
-            <div id="get_button_container"><div id="get_button"><span>GET</span></div></div>
+            <div class="btn btn-primary" id="get_button_container"><div id="get_button"><span>GET</span></div></div>
+            <button onclick="resetButtonClick()" id="resetbtn" type="button" class="btn btn-danger">Reset Search</button>
         </div>
     </div>
     
@@ -126,11 +127,11 @@
                       
                     </button>
                   </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <!-- <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in felis dignissim, imperdiet nulla vitae, condimentum nulla. Ut scelerisque a nisl sit amet facilisis. Etiam blandit iaculis tellus, vitae condimentum leo congue a. Vivamus in vehicula massa. Pellentesque libero libero, commodo lacinia volutpat non, tincidunt at lectus. Maecenas ipsum turpis, viverra vitae lacus eu, fringilla ultricies erat. Aenean hendrerit maximus sodales.
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 
             </div>
@@ -428,6 +429,7 @@
 <script src="/assets/js/index.js"></script>
 <script src="/assets/js/functions.js"></script>
 <script src="/assets/js/dummyData.js"></script>
+<script src="/assets/js/timeline.js"></script>
   
 </body>
 </html>

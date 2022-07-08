@@ -75,7 +75,7 @@ function initializeListeners() {
 document.querySelector("#map").addEventListener("click", e => {
     if (e.target.classList.contains("focus_on_tweet")) {
         let clickedEl = document.querySelector("[data-id='" + e.target.dataset.id + "']");
-        console.log(clickedEl);
+        // console.log(clickedEl);
         clickedEl.scrollIntoView();
         clickedEl.focus();
     }
@@ -92,4 +92,57 @@ function urlify(text) {
 
 function dateFormat(timestamp) {
     return new Date(timestamp).toGMTString();
+}
+
+////////////////////////////// *Wrote by: Chris Milios* //////////////////////////////
+
+const resetButtonClick = () => {
+    // console.log("reset button clicked");
+    showAreas();
+    deleteLayers();
+    clearAccordion();
+    map.flyTo({
+        center: [13.648668, 45.633331],
+        zoom: 10
+    })
+
+    document.getElementById("resetbtn").style.display = "none";
+}
+
+const deleteLayers = () => {
+
+    if(map.getLayer("MONOil")) {
+        map.removeLayer("MONOil");
+        map.removeSource("MONOil");
+    }
+
+
+    if(map.getLayer("MUGOil")) {
+        map.removeLayer("MUGOil");
+        map.removeSource("MUGOil");
+    }
+
+    if(map.getLayer("TRSOil")) {
+        map.removeLayer("TRSOil");
+        map.removeSource("TRSOil");
+    }
+
+}
+
+const hideAreas = () =>{
+    map.setLayoutProperty('MONArea', 'visibility', 'none');
+    map.setLayoutProperty('MUGArea', 'visibility', 'none');
+    map.setLayoutProperty('TRSArea', 'visibility', 'none');
+}
+
+const showAreas = () =>{
+    map.setLayoutProperty('MONArea', 'visibility', 'visible');
+    map.setLayoutProperty('MUGArea', 'visibility', 'visible');
+    map.setLayoutProperty('TRSArea', 'visibility', 'visible');
+}
+
+const hideLines = () =>{
+    map.setLayoutProperty('MONAreaLine', 'visibility', 'none');
+    map.setLayoutProperty('MUGAreaLine', 'visibility', 'none');
+    map.setLayoutProperty('TRSAreaLine', 'visibility', 'none');
 }

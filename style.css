@@ -292,7 +292,7 @@ input.datepicker {
     margin-top: 30px;
 }
 
-#get_button {
+/* #get_button {
     height: 30px;
     width: 170px;
     background-color: #364396;
@@ -303,7 +303,7 @@ input.datepicker {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-}
+} */
 
 #get_button:hover {
     background-color: #4255D4;
@@ -1264,6 +1264,7 @@ span#no_more_data {
 
 .timelineItem{
     background-color: #1A2049 !important;
+    border-radius:10px !important;
 }
 
 .titleHeader{
@@ -1285,6 +1286,8 @@ span#no_more_data {
 
 .accordion-item{
     background-color: #1A2049 !important;
+    border-radius:10px !important;
+    margin: 5px;
 }
 
 .accordion-body{
@@ -1296,6 +1299,20 @@ span#no_more_data {
     /* padding: 10px !important; */
 }
 
-* {
-    color: white
-  }
+.datelabel{
+    color: #E7E8EA !important;
+}
+
+#resetbtn{
+    display: none;
+    margin-top: auto;
+}
+
+
+.accordion-header{
+    border-radius: 10px !important;
+}
+
+.accordion-button{
+    border-radius: 10px !important;
+}
