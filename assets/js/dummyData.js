@@ -195,7 +195,7 @@ let TRSOil ={
     "type": "Feature",
     "properties": {
       "area": "TRS",
-      "type": "OIL"
+      "type": "OIL",
     },
     "geometry": {
       "type": "Polygon",

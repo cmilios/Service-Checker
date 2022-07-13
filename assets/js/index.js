@@ -57,7 +57,7 @@ let mode = url.searchParams.get("mode");
 if (mode) {
     radioButtonChecked = mode;
     document.querySelector("input[name=mode]#" + radioButtonChecked).checked = true;
-} else radioButtonChecked = document.querySelector("input[name=mode]:checked").id;
+} else radioButtonChecked = "tweets"//document.querySelector("input[name=mode]:checked").id;
 
 document.body.dataset.mode = radioButtonChecked;
 queryParameters["collection"] = radioButtonChecked;
@@ -83,7 +83,7 @@ let $datepickerFrom = $("#datepicker_from"),
     $datepickerTo = $("#datepicker_to");
 
 $('.datepicker').datepicker();
-$datepickerFrom.datepicker("setDate", "25/03/2017");
+$datepickerFrom.datepicker("setDate", new Date(Date.now() - 7 * 24 * 60 * 60 * 1000));
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, '0');
 let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -105,15 +105,26 @@ getButton.addEventListener("click", function () {
         queryParameters.to = queryParameters.to.getTime() + 86400000;
     }
 
-    if (radioButtonChecked === "tweets") {
-        queryParameters["with_image"] = $('#with_image').is(":checked");
-        queryParameters["with_location"] = $('#with_location').is(":checked");
-        queryParameters["only_relevant"] = $('#only_relevant').is(":checked");
-    }
+    // if (radioButtonChecked === "tweets") {
+    //     queryParameters["with_image"] = $('#with_image').is(":checked");
+    //     queryParameters["with_location"] = $('#with_location').is(":checked");
+    //     queryParameters["only_relevant"] = $('#only_relevant').is(":checked");
+    // }
     // console.log(queryParameters);
-    changePageNumber(0);
+    // changePageNumber(0);
+    console.log($("#datepicker_from").datepicker("getDate"))
+    console.log($("#datepicker_to").datepicker("getDate"))
+    showTimeControls()
     // newData();
 });
+
+const showTimeControls = () =>{
+    document.getElementById("timeControls").style.display = "flex"
+
+}
+
+
+
 
 // new data from / tweets, clusters / get button / next previous page / clusters / first retrieval
 // function newData() {

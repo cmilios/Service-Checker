@@ -32,7 +32,7 @@ const poppulateAccordion = (data) => {
 
     let accordionSubtitleContainer = document.createElement("div");
     accordionSubtitleContainer.classList.add("sub");
-    accordionSubtitleContainer.innerText = "From " + item.firstDate + " to " + item.lastDate;
+    accordionSubtitleContainer.innerText = "First occurance: " + item.firstDate + " \n Last occurance: " + item.lastDate;
 
     accordionInsideContainer.appendChild(accordionTitleContainer);
     accordionInsideContainer.appendChild(accordionSubtitleContainer);

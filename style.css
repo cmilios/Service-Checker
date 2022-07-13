@@ -1286,8 +1286,8 @@ span#no_more_data {
 
 .accordion-item{
     background-color: #1A2049 !important;
-    border-radius:10px !important;
-    margin: 5px;
+    border-radius:0px 0px 0px 0px !important;
+    margin: 0px 5px 5px 5px ;
 }
 
 .accordion-body{
@@ -1310,9 +1310,106 @@ span#no_more_data {
 
 
 .accordion-header{
-    border-radius: 10px !important;
+    border-radius: 0px 0px 0px 0px !important;
 }
 
 .accordion-button{
-    border-radius: 10px !important;
+    border-radius: 0px 0px 0px 0px !important;
+}
+
+.datepicker-switch{
+    color: white;
+}
+
+.dow{
+    color: white
+}
+
+.day{
+    color: white;
+}
+
+.prev{
+    color: white;
+}
+
+.next{
+    color: white;
+}
+.month{
+    color: white;
+}
+
+.year{
+    color: white;
+}
+.decade{
+    color: white;
+}
+
+.century{
+    color: white;
+}
+
+#myTab{
+    margin: 0px 5px 0px 5px;;
+}
+
+.accordion-button:focus{
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.nav-item{
+    flex: 1;
+    text-align: center;
+    
+}
+
+.nav-tabs .nav-link:hover{
+    border-color: #0d6efd !important;
+}
+
+.nav-tabs .nav-link.active{
+    background-color: #0d6efd !important;
+    color: white !important;
+    border-color: #0d6efd !important;
+}
+
+.nav-link{
+    color: white !important;
+}
+
+
+.timebtn {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    flex: 1;
+    text-align: center;
+  }
+  
+.timebtn:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+.next {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+#timeControls{
+    border: solid 2px white;
+    display: none;
+
 }
