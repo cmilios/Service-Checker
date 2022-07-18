@@ -83,7 +83,7 @@ let $datepickerFrom = $("#datepicker_from"),
     $datepickerTo = $("#datepicker_to");
 
 $('.datepicker').datepicker();
-$datepickerFrom.datepicker("setDate", new Date(Date.now() - 7 * 24 * 60 * 60 * 1000));
+$datepickerFrom.datepicker("setDate", new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)); //7 days ago from today
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, '0');
 let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -95,14 +95,16 @@ $datepickerTo.datepicker("setDate", today);
 let getButton = document.querySelector("#get_button"),
     page = 0;
 
-getButton.addEventListener("click", function () {
+
+const getHistoricalData = () => {
+
     queryParameters["from"] = $("#datepicker_from").datepicker("getDate");
     queryParameters["to"] = $("#datepicker_to").datepicker("getDate");
     queryParameters["limit"] = pageSize;
 
     if (queryParameters.from != undefined && queryParameters.to != undefined) {
         queryParameters.from = queryParameters.from.getTime();
-        queryParameters.to = queryParameters.to.getTime() + 86400000;
+        queryParameters.to = queryParameters.to.getTime() + 86400000; 
     }
 
     // if (radioButtonChecked === "tweets") {
@@ -110,13 +112,13 @@ getButton.addEventListener("click", function () {
     //     queryParameters["with_location"] = $('#with_location').is(":checked");
     //     queryParameters["only_relevant"] = $('#only_relevant').is(":checked");
     // }
-    // console.log(queryParameters);
+    console.log(queryParameters);
     // changePageNumber(0);
     console.log($("#datepicker_from").datepicker("getDate"))
     console.log($("#datepicker_to").datepicker("getDate"))
     showTimeControls()
     // newData();
-});
+}
 
 const showTimeControls = () =>{
     document.getElementById("timeControls").style.display = "flex"
@@ -441,7 +443,7 @@ let paginationButtons = document.querySelectorAll(".pagination_buttons"),
     previousPage = document.querySelector("#previous_page"),
     nextPage = document.querySelector("#next_page");
 // initialization();
-getButton.click();
+// getButton.click();
 
 function changePageNumber(pageNumber) {
     page = pageNumber;

@@ -78,11 +78,11 @@
             </label> -->
 
             <div id="timeControls">
-                <a class="timebtn" href="#" class="previous round"><i style="padding-top: 6px;" class="fa-solid fa-angle-left"></i></a>
-                <a class="timebtn" href="#" class="previous round"><i style="padding-top: 6px;" class="fa-solid fa-play"></i></a>
-                <a class="timebtn" href="#" class="next round"><i style="padding-top: 6px;" class="fa-solid fa-angle-right"></i></a>
+                <a class="timebtn" class="previous round"><i style="padding-top: 6px;" class="fa-solid fa-angle-left"></i></a>
+                <a class="timebtn" class="round"><i style="padding-top: 6px;" class="fa-solid fa-play"></i></a>
+                <a class="timebtn" class="next round"><i style="padding-top: 6px;" class="fa-solid fa-angle-right"></i></a>
             </div>
-            <div class="btn btn-primary" id="get_button_container"><div id="get_button"><span>GET</span></div></div>
+            <div onclick="getHistoricalData()" class="btn btn-primary" id="get_button_container"><div id="get_button"><span>GET</span></div></div>
             <button onclick="resetButtonClick()" id="resetbtn" type="button" class="btn btn-danger">Reset Search</button>
         </div>
     </div>
@@ -116,7 +116,6 @@
             </div>
         </div>
         <div class="content">
-
             <ul class="nav nav-tabs" id="myTab">
                 <li class="nav-item">
                     <a href="#accordionExample" class="nav-link active"><span>Types</span></a>
@@ -146,31 +145,84 @@
                         </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Title</h5>
-                                    <small class="text-muted">date</small>
-                                </div>
-                                <p class="mb-1">Message</p>
-                                <small class="text-muted">Subtitle</small>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Title</h5>
-                                    <small class="text-muted">date</small>
-                                </div>
-                                <p class="mb-1">Message</p>
-                                <small class="text-muted">Subtitle</small>
-                            </a>
-                        </div>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">Title</h5>
+                                        <small class="text-muted">date</small>
+                                    </div>
+                                    <p class="mb-1">Message</p>
+                                    <small class="text-muted">Subtitle</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">Title</h5>
+                                        <small class="text-muted">date</small>
+                                    </div>
+                                    <p class="mb-1">Message</p>
+                                    <small class="text-muted">Subtitle</small>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    
                     
                 </div>
 
                 <div class="tab-pane fade" id="existing">
-                    <h2 >lalala</h2>
+                    
+
+
+                    <div id="spinner" class="spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+
+                    <div id="emptyMessage">
+                        <h2>No results yet...</h2>
+                    </div>
+                    
+                    <div id="historicalData">
+                        <div class="accordion tab-pane fade show active" id="accordionHistorical">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                <button class="timelineItem accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapsetest" aria-expanded="true" aria-controls="collapseTest">
+                                <div>
+                                    <div>
+                                        <h2 class="title">title</h2>
+                                    </div>
+                                    <div class="sub">
+                                        date
+                                    </div> 
+                                </div>
+                                    
+                                </button>
+                                </h2>
+                                <div id="collapsetest" class="accordion-collapse collapse" aria-labelledby="headingTest" data-bs-parent="#accordionHistorical">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Title</h5>
+                                                <small class="text-muted">date</small>
+                                            </div>
+                                            <p class="mb-1">Message</p>
+                                            <small class="text-muted">Subtitle</small>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Title</h5>
+                                                <small class="text-muted">date</small>
+                                            </div>
+                                            <p class="mb-1">Message</p>
+                                            <small class="text-muted">Subtitle</small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
+
+
                 </div>
 
             </div>
