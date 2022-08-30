@@ -11,8 +11,8 @@ let noMoreData = false;
 
 map = addMap()
 addLocationLayers();
-setMapAnimation();
-clickInteraction();
+// setMapAnimation();
+// clickInteraction();
 
 // Resize of components
 let previousWidth = 0,

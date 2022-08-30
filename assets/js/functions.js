@@ -98,12 +98,12 @@ function dateFormat(timestamp) {
 
 const resetButtonClick = () => {
     // console.log("reset button clicked");
-    showAreas();
+    // showAreas();
     deleteLayers();
     clearAccordion();
     map.flyTo({
-        center: [13.648668, 45.633331],
-        zoom: 10
+        center: [17.773145, 48.557861],
+        zoom: 3.5
     })
 
     document.getElementById("resetbtn").style.display = "none";

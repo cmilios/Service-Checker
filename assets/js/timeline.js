@@ -3,7 +3,6 @@ const poppulateAccordion = (data) => {
 
   // Funcrion to populate the accordion with the data taken from the API
 
-
   $("#accordionExample").empty();
   data.forEach(item => {
     let accordionHeader = document.createElement("h2");

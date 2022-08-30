@@ -1,3 +1,6 @@
+
+//AREA LAYERS
+
 let MONArea = {
   "type": "Feature",
   "properties": {
@@ -188,6 +191,8 @@ let TRSArea = {
   }
 }
 
+
+//DUMMY DATA
 
 let TRSOil ={
   "type": "FeatureCollection",

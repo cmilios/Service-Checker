@@ -10,8 +10,8 @@ function addMap() {
         map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/satellite-streets-v11', // style URL
-            center: [13.648668, 45.633331], // starting position [lng, lat]
-            zoom: 10 // starting zoom
+            center: [17.773145, 48.557861], // starting position [lng, lat]
+            zoom: 3.5 // starting zoom
         });
         map.addControl(new mapboxgl.NavigationControl());
         map.addControl(new mapboxgl.FullscreenControl());
@@ -69,6 +69,7 @@ function addMap() {
                 }
             });
         });
+        map.doubleClickZoom.disable();
         return map;
     }
 };
@@ -78,142 +79,182 @@ function addMap() {
 const addLocationLayers = ()=>{
 
 
-    map.on('load', function () {
-        map.addSource('MON', {
-            'type': 'geojson',
-            'data': MONArea
-    
+    new ClickableMarker()
+    .setLngLat(turf.center(MONArea).geometry.coordinates)
+    .onClick(() => {
+        document.getElementById("resetbtn").style.display = "block";
+        createTimeline("MON")
+        showsSublayer("MON");
+        map.flyTo({
+            center: turf.center(MONArea).geometry.coordinates,
+            zoom: 12
         });
-        map.addSource('MUG', {
-            'type': 'geojson',
-            'data': MUGArea
-    
-        });
-        map.addSource('TRS', {
-            'type': 'geojson',
-            'data': TRSArea
-    
-    
-        });
-        map.addLayer({
-            'id': 'MONArea',
-            'type': 'fill',
-            'source': 'MON',
-            'layout': {'visibility': 'visible'},
-    
-            'paint': {
-    
-                "fill-color": 'white',
-                'fill-outline-color': "red",
-                'fill-opacity': 0.4
-    
-            }
-    
-    
-        });
-        map.addLayer({
-            'id': 'MUGArea',
-            'type': 'fill',
-            'source': 'MUG',
-            'layout': {'visibility': 'visible'},
-    
-            'paint': {
-    
-                "fill-color": 'white',
-                'fill-outline-color': "red",
-                'fill-opacity': 0.4
-    
-            }
-    
-    
-        });
-        map.addLayer({
-            'id': 'TRSArea',
-            'type': 'fill',
-            'source': 'TRS',
-            'layout': {'visibility': 'visible'},
-    
-            'paint': {
-    
-                "fill-color": 'white',
-                'fill-outline-color': "red",
-                'fill-opacity': 0.4
-    
-            } 
-        });
-
-
-
-        //Adding lines layer to show focus on hover
-        map.addLayer({
-            'id': 'MONAreaLine',
-            'type': 'line',
-            'source': 'MON',
-            'layout': {'visibility': 'none'},
-    
-            'paint': {
-                'line-width': 1,
-                'line-color': 'red'
-            }
-        });
-        map.addLayer({
-            'id': 'MUGAreaLine',
-            'type': 'line',
-            'source': 'MUG',
-            'layout': {'visibility': 'none'},
-    
-            'paint': {
-                'line-width': 1,
-                'line-color': 'red'
-            }
-        });
-        map.addLayer({
-            'id': 'TRSAreaLine',
-            'type': 'line',
-            'source': 'TRS',
-            'layout': {'visibility': 'none'},
-    
-            'paint': {
-                'line-width': 1,
-                'line-color': 'red'
-            }
-        });
-
     })
+    .addTo(map);
+
+    new ClickableMarker()
+    .setLngLat(turf.center(TRSArea).geometry.coordinates)
+    .onClick(() => {
+        document.getElementById("resetbtn").style.display = "block";
+        createTimeline("TRS")
+        showsSublayer("TRS");
+        map.flyTo({
+            center: turf.center(TRSArea).geometry.coordinates,
+            zoom: 13
+        });
+    })
+    .addTo(map);
+
+    new ClickableMarker()
+    .setLngLat(turf.center(MUGArea).geometry.coordinates)
+    .onClick(() => {
+        document.getElementById("resetbtn").style.display = "block";
+        createTimeline("MUG")
+        showsSublayer("MUG");
+        map.flyTo({
+            center: turf.center(MUGArea).geometry.coordinates,
+            zoom: 12
+        });
+    })
+    .addTo(map);
+
+
+    // map.on('load', function () {
+    //     map.addSource('MON', {
+    //         'type': 'geojson',
+    //         'data': MONArea
+    
+    //     });
+    //     map.addSource('MUG', {
+    //         'type': 'geojson',
+    //         'data': MUGArea
+    
+    //     });
+    //     map.addSource('TRS', {
+    //         'type': 'geojson',
+    //         'data': TRSArea
+    
+    
+    //     });
+    //     map.addLayer({
+    //         'id': 'MONArea',
+    //         'type': 'fill',
+    //         'source': 'MON',
+    //         'layout': {'visibility': 'visible'},
+    
+    //         'paint': {
+    
+    //             "fill-color": 'white',
+    //             'fill-outline-color': "red",
+    //             'fill-opacity': 0.4
+    
+    //         }
+    
+    
+    //     });
+    //     map.addLayer({
+    //         'id': 'MUGArea',
+    //         'type': 'fill',
+    //         'source': 'MUG',
+    //         'layout': {'visibility': 'visible'},
+    
+    //         'paint': {
+    
+    //             "fill-color": 'white',
+    //             'fill-outline-color': "red",
+    //             'fill-opacity': 0.4
+    
+    //         }
+    
+    
+    //     });
+    //     map.addLayer({
+    //         'id': 'TRSArea',
+    //         'type': 'fill',
+    //         'source': 'TRS',
+    //         'layout': {'visibility': 'visible'},
+    
+    //         'paint': {
+    
+    //             "fill-color": 'white',
+    //             'fill-outline-color': "red",
+    //             'fill-opacity': 0.4
+    
+    //         } 
+    //     });
+
+
+
+    //     Adding lines layer to show focus on hover
+    //     map.addLayer({
+    //         'id': 'MONAreaLine',
+    //         'type': 'line',
+    //         'source': 'MON',
+    //         'layout': {'visibility': 'none'},
+    
+    //         'paint': {
+    //             'line-width': 1,
+    //             'line-color': 'red'
+    //         }
+    //     });
+    //     map.addLayer({
+    //         'id': 'MUGAreaLine',
+    //         'type': 'line',
+    //         'source': 'MUG',
+    //         'layout': {'visibility': 'none'},
+    
+    //         'paint': {
+    //             'line-width': 1,
+    //             'line-color': 'red'
+    //         }
+    //     });
+    //     map.addLayer({
+    //         'id': 'TRSAreaLine',
+    //         'type': 'line',
+    //         'source': 'TRS',
+    //         'layout': {'visibility': 'none'},
+    
+    //         'paint': {
+    //             'line-width': 1,
+    //             'line-color': 'red'
+    //         }
+    //     });
+
+    // })
 }
 
-const setMapAnimation = () =>{
-    map.on('mousemove', "MUGArea", function () {
-        map.getCanvas().style.cursor = 'pointer'
-        map.setLayoutProperty('MUGAreaLine', 'visibility', 'visible');
+// const setMapAnimation = () =>{
+//     map.on('mousemove', "MUGArea", function () {
+//         map.getCanvas().style.cursor = 'pointer'
+//         map.setLayoutProperty('MUGAreaLine', 'visibility', 'visible');
         
-    });
-    map.on('mouseleave', "MUGArea", function () {
-        map.getCanvas().style.cursor = ''
-        map.setLayoutProperty('MUGAreaLine', 'visibility', 'none');
-    });
+//     });
+//     map.on('mouseleave', "MUGArea", function () {
+//         map.getCanvas().style.cursor = ''
+//         map.setLayoutProperty('MUGAreaLine', 'visibility', 'none');
+//     });
 
 
-    map.on('mousemove', "MONArea", function () {
-        map.getCanvas().style.cursor = 'pointer'
-        map.setLayoutProperty('MONAreaLine', 'visibility', 'visible');
-    });
-    map.on('mouseleave', "MONArea", function () {
-        map.getCanvas().style.cursor = ''
-        map.setLayoutProperty('MONAreaLine', 'visibility', 'none');
-    });
+//     map.on('mousemove', "MONArea", function () {
+//         map.getCanvas().style.cursor = 'pointer'
+//         map.setLayoutProperty('MONAreaLine', 'visibility', 'visible');
+//     });
+//     map.on('mouseleave', "MONArea", function () {
+//         map.getCanvas().style.cursor = ''
+//         map.setLayoutProperty('MONAreaLine', 'visibility', 'none');
+//     });
 
 
-    map.on('mousemove', "TRSArea", function () {
-        map.getCanvas().style.cursor = 'pointer'
-        map.setLayoutProperty('TRSAreaLine', 'visibility', 'visible');
-    });
-    map.on('mouseleave', "TRSArea", function () {
-        map.getCanvas().style.cursor = ''
-        map.setLayoutProperty('TRSAreaLine', 'visibility', 'none');
-    });
+//     map.on('mousemove', "TRSArea", function () {
+//         map.getCanvas().style.cursor = 'pointer'
+//         map.setLayoutProperty('TRSAreaLine', 'visibility', 'visible');
+//     });
+//     map.on('mouseleave', "TRSArea", function () {
+//         map.getCanvas().style.cursor = ''
+//         map.setLayoutProperty('TRSAreaLine', 'visibility', 'none');
+//     });
 
-}
+// }
 
 
 
@@ -250,8 +291,7 @@ const clickInteraction = () =>{
             center: turf.center(TRSArea).geometry.coordinates,
             zoom: 12
         });
-    }
-    );
+    });
 }
 
 

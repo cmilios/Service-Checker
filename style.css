@@ -1428,3 +1428,12 @@ span#no_more_data {
     display: none;
     user-select: none;
 }
+
+.mapboxgl-marker:hover {
+    cursor: pointer;
+  }
+
+  /* darken the marker on hover */
+.mapboxgl-marker:hover svg > g > g:nth-child(2) {
+    fill: #7993a5;
+}
