@@ -1437,3 +1437,7 @@ span#no_more_data {
 .mapboxgl-marker:hover svg > g > g:nth-child(2) {
     fill: #7993a5;
 }
+
+.item{
+    margin: 0px 5px 5px 5px;
+}

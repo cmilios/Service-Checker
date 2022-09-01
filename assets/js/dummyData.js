@@ -194,13 +194,19 @@ let TRSArea = {
 
 //DUMMY DATA
 
-let TRSOil ={
+let TRSLayers ={
   "type": "FeatureCollection",
   "features": [{
     "type": "Feature",
     "properties": {
       "area": "TRS",
-      "type": "OIL",
+      "type": "WDN",
+      "title": "Water on the field",
+      "message": "Molestiae ducimus delectus aut. Culpa voluptatibus sit possimus quia magnam. Ut nesciunt fuga qui eum sit praesentium blanditiis.",
+      "date": "2019-03-12T00:00:00.000Z",
+      "sub": "eos laudantium ea",
+      "id": 1
+  
     },
     "geometry": {
       "type": "Polygon",
@@ -250,7 +256,13 @@ let TRSOil ={
     "type": "Feature",
     "properties": {
       "area": "TRS",
-      "type": "OIL"
+      "type": "FLD",
+      "title": "Flood on the field",
+      "message": "Molestiae ducimus delectus aut. Culpa voluptatibus sit possimus quia magnam. Ut nesciunt fuga qui eum sit praesentium blanditiis.",
+      "date": "2019-03-12T00:00:00.000Z",
+      "sub": "eos laudantium ea",
+      "id": 2
+  
     },
     "geometry": {
       "type": "Polygon",
@@ -302,11 +314,17 @@ let TRSOil ={
   }]
 }
 
-let MUGOil = {
+let MUGLayers = {
   "type": "Feature",
   "properties": {
     "area": "MUG",
-    "type": "OIL"
+    "type": "MDW",
+    "title": "Muddy water on the field",
+    "message": "Molestiae ducimus delectus aut. Culpa voluptatibus sit possimus quia magnam. Ut nesciunt fuga qui eum sit praesentium blanditiis.",
+    "date": "2019-03-12T00:00:00.000Z",
+    "sub": "eos laudantium ea",
+    "id": 3
+
   },
   "geometry": {
     "type": "Polygon",
@@ -349,14 +367,19 @@ let MUGOil = {
   }
 }
 
-let MONOil = {
+let MONLayers = {
   "type": "FeatureCollection",
   "features": [
     {
       "type": "Feature",
       "properties": {
         "area": "MON",
-        "type": "OIL"
+        "type": "OIL",
+        "title": "OIL on the field",
+        "message": "Quod blanditiis qui est ab aut nulla. Ipsam atque omnis rerum iste. Rerum doloremque impedit pariatur.Ipsa consequatur ad. Deleniti ipsum aut atque et tenetur sequi quam dicta dolorum. Error omnis reiciendis perspiciatis temporibus tempore. Iste est voluptatem nisi impedit eos quia eos.Dicta eum nihil dolor. Dicta id nisi nam aut magni dolor et. Voluptates qui qui ut accusantium qui in et. Tenetur voluptates fuga eaque laudantium consequuntur voluptatem eos et. Iste sit quia sunt et maxime eveniet. Eum consectetur et ut.",
+        "date": "2019-03-12T00:00:00.000Z",
+        "sub": "eos laudantium ea",
+        "id": 4
       },
       "geometry": {
         "type": "Polygon",
@@ -389,44 +412,8 @@ let MONOil = {
           ]
         ]
       }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "area": "MON",
-        "type": "OIL"
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              13.536508083343506,
-              45.77945138768406
-            ],
-            [
-              13.531701564788818,
-              45.77569503203348
-            ],
-            [
-              13.531336784362793,
-              45.77346504384653
-            ],
-            [
-              13.536508083343506,
-              45.77767051754706
-            ],
-            [
-              13.54114294052124,
-              45.78120227177821
-            ],
-            [
-              13.536508083343506,
-              45.77945138768406
-            ]
-          ]
-        ]
-      }
     }
   ]
 }
+
+const layers = [TRSLayers, MUGLayers, MONLayers]

@@ -83,6 +83,7 @@ const addLocationLayers = ()=>{
     .setLngLat(turf.center(MONArea).geometry.coordinates)
     .onClick(() => {
         document.getElementById("resetbtn").style.display = "block";
+        deleteLayers();
         createTimeline("MON")
         showsSublayer("MON");
         map.flyTo({
@@ -96,6 +97,7 @@ const addLocationLayers = ()=>{
     .setLngLat(turf.center(TRSArea).geometry.coordinates)
     .onClick(() => {
         document.getElementById("resetbtn").style.display = "block";
+        deleteLayers();
         createTimeline("TRS")
         showsSublayer("TRS");
         map.flyTo({
@@ -109,6 +111,7 @@ const addLocationLayers = ()=>{
     .setLngLat(turf.center(MUGArea).geometry.coordinates)
     .onClick(() => {
         document.getElementById("resetbtn").style.display = "block";
+        deleteLayers();
         createTimeline("MUG")
         showsSublayer("MUG");
         map.flyTo({
@@ -258,41 +261,41 @@ const addLocationLayers = ()=>{
 
 
 
-const clickInteraction = () =>{
-    map.on('click', "MONArea", function (e) {
-        document.getElementById("resetbtn").style.display = "block";
-        hideAreas();
-        hideLines()
-        createTimeline("MON")
-        showsSublayer("MON");
-        map.flyTo({
-            center: turf.center(MONArea).geometry.coordinates,
-            zoom: 12
-        });
-    });
-    map.on('click', "MUGArea", function (e) {
-        document.getElementById("resetbtn").style.display = "block";
-        hideAreas();
-        hideLines()
-        createTimeline("MUG")
-        showsSublayer("MUG");
-        map.flyTo({
-            center: turf.center(MUGArea).geometry.coordinates,
-            zoom: 13
-        });
-    });
-    map.on('click', "TRSArea", function (e) {
-        document.getElementById("resetbtn").style.display = "block";
-        hideAreas();
-        hideLines()
-        createTimeline("MUG")
-        showsSublayer("TRS");
-        map.flyTo({
-            center: turf.center(TRSArea).geometry.coordinates,
-            zoom: 12
-        });
-    });
-}
+// const clickInteraction = () =>{
+//     map.on('click', "MONArea", function (e) {
+//         document.getElementById("resetbtn").style.display = "block";
+//         hideAreas();
+//         hideLines()
+//         createTimeline("MON")
+//         showsSublayer("MON");
+//         map.flyTo({
+//             center: turf.center(MONArea).geometry.coordinates,
+//             zoom: 12
+//         });
+//     });
+//     map.on('click', "MUGArea", function (e) {
+//         document.getElementById("resetbtn").style.display = "block";
+//         hideAreas();
+//         hideLines()
+//         createTimeline("MUG")
+//         showsSublayer("MUG");
+//         map.flyTo({
+//             center: turf.center(MUGArea).geometry.coordinates,
+//             zoom: 13
+//         });
+//     });
+//     map.on('click', "TRSArea", function (e) {
+//         document.getElementById("resetbtn").style.display = "block";
+//         hideAreas();
+//         hideLines()
+//         createTimeline("MUG")
+//         showsSublayer("TRS");
+//         map.flyTo({
+//             center: turf.center(TRSArea).geometry.coordinates,
+//             zoom: 12
+//         });
+//     });
+// }
 
 
 const createTimeline = (area) =>{
@@ -300,26 +303,31 @@ const createTimeline = (area) =>{
     // Should be made a request to the server to get the data,
     // Using dummy data for now
     // Should get what type of data each area has
+
     let data = [
         {
+            area: "MON",
             type: "OIL",
             fullName: "Oil Spill",
             firstDate:"12/1/21",
             lastDate:"30/3/22"
         },
         {
+            area: "TRS",
             type: "WDN",
             fullName: "Water Deliniation",
             firstDate:"12/1/21",
             lastDate:"18/4/22"
         },
         {
+            area: "TRS",
             type: "FLD",
             fullName: "Floods",
             firstDate:"12/1/21",
             lastDate:"11/8/22"
         },
         {
+            area: "MUG",
             type: "MDW",
             fullName: "Muddy Water",
             firstDate:"12/1/21",
@@ -327,8 +335,18 @@ const createTimeline = (area) =>{
 
         }
     ];
+    if (area == null){
+        
+        poppulateAccordion(data , false, layers);
 
-    poppulateAccordion(data);
+    }
+    else{
+        let filteredData = data.filter((item) => item.area == area);
+        let filteredLayers = layers.filter((item) =>item.features==undefined? item.properties.area==area : item.features[0].properties.area == area);
+        poppulateAccordion(filteredData, true, filteredLayers);
+    }
+
+    
 
 }
 
@@ -338,18 +356,18 @@ const createTimeline = (area) =>{
 
 
 const showsSublayer = (area) =>{
-    if(area === "MON"){
+    if(area === "TRS"){
 
         //should be made as request in order to get the data
-        map.addSource('MONOil', {
+        map.addSource('TRSLayers', {
             'type': 'geojson',
-            'data': MONOil,
+            'data': TRSLayers,
             
         })
         map.addLayer({
-            'id': 'MONOil',
+            'id': 'TRSLayers',
             'type': 'fill',
-            'source': 'MONOil',
+            'source': 'TRSLayers',
             'layout': {'visibility': 'visible'},
     
             'paint': {
@@ -361,15 +379,15 @@ const showsSublayer = (area) =>{
        
     }
     if(area === "MUG"){
-        map.addSource('MUGOil', {
+        map.addSource('MUGLayers', {
             'type': 'geojson',
-            'data': MUGOil,
+            'data': MUGLayers,
             
         })
         map.addLayer({
-            'id': 'MUGOil',
+            'id': 'MUGLayers',
             'type': 'fill',
-            'source': 'MUGOil',
+            'source': 'MUGLayers',
             'layout': {'visibility': 'visible'},
     
             'paint': {
@@ -379,17 +397,17 @@ const showsSublayer = (area) =>{
             }
         })
     }
-    if(area === "TRS"){
+    if(area === "MON"){
         //should be made as request in order to get the data
 
-        map.addSource('TRSOil', {
+        map.addSource('MONLayers', {
             'type': 'geojson',
-            'data': TRSOil,
+            'data': MONLayers,
         })
         map.addLayer({
-            'id': 'TRSOil',
+            'id': 'MONLayers',
             'type': 'fill',
-            'source': 'TRSOil',
+            'source': 'MONLayers',
             'layout': {'visibility': 'visible'},
 
             'paint': {

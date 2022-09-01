@@ -13,6 +13,7 @@ map = addMap()
 addLocationLayers();
 // setMapAnimation();
 // clickInteraction();
+createTimeline(null);
 
 // Resize of components
 let previousWidth = 0,

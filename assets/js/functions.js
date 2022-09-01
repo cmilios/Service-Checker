@@ -101,6 +101,7 @@ const resetButtonClick = () => {
     // showAreas();
     deleteLayers();
     clearAccordion();
+    createTimeline(null, false)
     map.flyTo({
         center: [17.773145, 48.557861],
         zoom: 3.5
@@ -111,20 +112,20 @@ const resetButtonClick = () => {
 
 const deleteLayers = () => {
 
-    if(map.getLayer("MONOil")) {
-        map.removeLayer("MONOil");
-        map.removeSource("MONOil");
+    if(map.getLayer("MONLayers")) {
+        map.removeLayer("MONLayers");
+        map.removeSource("MONLayers");
     }
 
 
-    if(map.getLayer("MUGOil")) {
-        map.removeLayer("MUGOil");
-        map.removeSource("MUGOil");
+    if(map.getLayer("MUGLayers")) {
+        map.removeLayer("MUGLayers");
+        map.removeSource("MUGLayers");
     }
 
-    if(map.getLayer("TRSOil")) {
-        map.removeLayer("TRSOil");
-        map.removeSource("TRSOil");
+    if(map.getLayer("TRSLayers")) {
+        map.removeLayer("TRSLayers");
+        map.removeSource("TRSLayers");
     }
 
 }
@@ -145,4 +146,49 @@ const hideLines = () =>{
     map.setLayoutProperty('MONAreaLine', 'visibility', 'none');
     map.setLayoutProperty('MUGAreaLine', 'visibility', 'none');
     map.setLayoutProperty('TRSAreaLine', 'visibility', 'none');
+}
+
+const highlightLayer = (event, item, id) => {
+    hoveredFeature = "";
+    
+    layers.forEach(layer => {
+        if(layer.type == 'Feature'){
+            if(layer.properties.id == id){
+                hoveredFeature = layer;
+            }
+        }
+        else if(layer.type == 'FeatureCollection'){
+            layer.features.forEach(feature => {
+                if(feature.properties.id == id){
+                    hoveredFeature = feature;
+                }
+            })
+        }
+        
+    });
+    console.log(hoveredFeature)
+
+
+}
+
+const unhighlightLayer = (event, item,id) => {
+
+    unHoveredFeature = "";
+    
+    layers.forEach(layer => {
+        if(layer.type == 'Feature'){
+            if(layer.properties.id == id){
+                unHoveredFeature = layer;
+            }
+        }
+        else if(layer.type == 'FeatureCollection'){
+            layer.features.forEach(feature => {
+                if(feature.properties.id == id){
+                    unHoveredFeature = feature;
+                }
+            })
+        }
+        
+    });
+    console.log(unHoveredFeature)
 }
